@@ -1,0 +1,27 @@
+{
+  "name": "mention-block",
+  "version": "1.0.0",
+  "description": "Mention block",
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "author": "CodeLingo",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-node-resolve": "^13.2.0",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@types/react": "^18.0.1",
+    "react": "^18.0.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-dts": "^4.2.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts"
+}
