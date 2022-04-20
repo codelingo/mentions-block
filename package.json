@@ -32,22 +32,31 @@
     "@testing-library/react": "^13.0.1",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.1",
+    "acorn": "^8.7.0",
+    "autoprefixer": "^10.4.4",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "postcss": "^8.4.12",
     "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "rollup": "^2.70.1",
     "rollup-plugin-dts": "^4.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
+    "tailwindcss": "^3.0.24",
     "tslib": "^2.3.1",
     "typescript": "^4.6.3",
-    "webpack-5": "0.0.0"
+    "webpack": "^5.72.0"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "compute-scroll-into-view": "^1.0.17",
+    "@codelingo/react-tiny-popover": "6.0.8",
+    "postcss": "^8.4.12"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -55,8 +64,5 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "dependencies": {
-    "postcss": "^8.4.12",
-    "react-dom": "^18.0.0"
-  }
+  "dependencies": {}
 }
