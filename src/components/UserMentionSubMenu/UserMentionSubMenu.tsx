@@ -5,13 +5,14 @@ import { CommandPaletteAPI } from "../CommandPaletteAPI/command-palette-state";
 import { SubMenu } from "../SubMenu/SubMenu";
 
 export type UserMentionSubMenuProps<T> = { 
-  palette: CommandPaletteAPI; 
+  palette?: CommandPaletteAPI | undefined; 
   //node: MentionNode; 
-  onConfirmed: () => void | undefined;
+  onConfirmed?: () => void | undefined;
+  onClose: () => void;
   team: TeamWithMembers | undefined; 
 };
 
-const UserMentionSubMenu = <T,>({ palette, /*node,*/ onConfirmed, team}: UserMentionSubMenuProps<T>) =>  {  
+const UserMentionSubMenu = <T,>({ palette, /*node,*/ onConfirmed, onClose, team}: UserMentionSubMenuProps<T>) =>  {  
   function handleItemConfirmed(user: User) {
       console.log("handleItemConfirmed");
 
@@ -33,6 +34,7 @@ const UserMentionSubMenu = <T,>({ palette, /*node,*/ onConfirmed, team}: UserMen
       itemToFilterString={makeFilterString}
       itemToKey={makeLanguageKey}
       onConfirmed={handleItemConfirmed}
+      onClose={onClose}
       palette={palette}
     />
   );

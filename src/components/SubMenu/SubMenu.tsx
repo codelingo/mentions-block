@@ -10,8 +10,9 @@ export type SubMenuProps<T> = {
     itemToFilterString(item: T): string;
     itemRenderer(item: T): JSX.Element;
     placeholder: string;
-    palette: CommandPaletteAPI;
+    palette?: CommandPaletteAPI | undefined;
     onConfirmed(item: T): any;
+    onClose: () => void;
   };
 
 export function SubMenu<T>({
@@ -22,6 +23,7 @@ export function SubMenu<T>({
     placeholder,
     palette,
     onConfirmed,
+    onClose,
   }: SubMenuProps<T>) {
     const [filterText, setFilterText] = useState("");
     const selectedItemRef = useRef<HTMLLIElement>(null);
@@ -42,26 +44,24 @@ export function SubMenu<T>({
     }, [selectedItemRef.current]);
   
     function handleEscape() {
-      //dispatch({ type: "reapplyFocus" });
-      //palette.hide();
-      console.log("handleEscape()")
+      console.log("handleEscape()", onClose)
+      handleClose();
     }
   
     function handleClose() {
-      console.log("handleClose()")
-      // palette.hide();
+      setTimeout(() => onClose());
     }
   
     function handleItemClick(item: T) {
-      console.log("handleItemClick")
       if (!item) {
         return;
       }
-     // handleItemConfirmed(item);
+      handleItemConfirmed(item);
     }
   
     function handleItemConfirmed(item: T) {
       handleClose();
+      alert(item.displayName)
       setTimeout(() => onConfirmed(item));
     }
   

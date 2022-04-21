@@ -66,7 +66,7 @@ export function useFilter<T>(
         e.preventDefault();
         e.stopPropagation();
       }
-    },
+    }
   };
 }
 interface UseFilterAPI<T> {
