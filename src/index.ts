@@ -1,1 +1,1 @@
-export * from './components/Mentions';
+export * from './components';

@@ -1,1 +1,1 @@
-export { default } from "./Mentions"
+export { default as Mentions } from "./Mentions"

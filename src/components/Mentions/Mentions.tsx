@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Popover } from "@codelingo/react-tiny-popover";
-import UserMentionSubMenu from "../UserMentionSubMenu";
-import { UserMentionSubMenuProps } from "../UserMentionSubMenu/UserMentionSubMenu";
+//import UserMentionSubMenu  from "../UserMentionSubMenu/UserMentionSubMenu";
+import UserMentionSubMenu, {
+  UserMentionSubMenuProps
+} from "../UserMentionSubMenu/UserMentionSubMenu";
 import { TeamWithMembers } from "../../model/auth";
 
 export interface MentionsProps {
@@ -18,15 +20,7 @@ const Mentions = (props: MentionsProps) => {
   };
 
   return (
-    <Popover
-      isOpen={isOpen}
-      content={() => <UserMentionSubMenu team={props.team} onClose={onClose} />}
-      align={"start"}
-      positions={["bottom"]}
-      onClickOutside={onClose}
-    >
-      <p></p>
-    </Popover>
+    <>{isOpen && <UserMentionSubMenu team={props.team} onClose={onClose} />}</>
   );
 };
 
