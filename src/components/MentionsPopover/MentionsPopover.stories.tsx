@@ -44,7 +44,5 @@ const team: TeamWithMembers = {
 export const HelloWorld = Template.bind({});
 HelloWorld.args = {
   children: <p></p>,
-  label: "Hello world!",
-  isOpen: true,
   team: team
 };

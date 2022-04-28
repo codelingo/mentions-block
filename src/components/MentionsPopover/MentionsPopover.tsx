@@ -7,8 +7,6 @@ import { TeamWithMembers } from "../../model/auth";
 
 export interface MentionsPopoverProps {
   children: JSX.Element;
-  label: string;
-  isOpen: boolean;
   team: TeamWithMembers | undefined;
 }
 
