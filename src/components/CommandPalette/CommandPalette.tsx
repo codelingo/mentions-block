@@ -17,7 +17,7 @@ export const CommandPalette = forwardRef(
 
     function renderMenu() {
       // prettier-ignore
-      return <UserMentionSubMenu palette={palette} team={undefined} onClose={() =>{}}/>;
+      return <UserMentionSubMenu palette={palette} team={undefined} onClose={() =>{}} onConfirmed={()=> {}}/>;
     }
 
     function getMenuPosition(): Exclude<PopoverPosition, "custom"> {

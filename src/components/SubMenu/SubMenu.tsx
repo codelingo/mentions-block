@@ -59,10 +59,9 @@ export function SubMenu<T>({
     handleItemConfirmed(item);
   }
 
-  function handleItemConfirmed(item: any) {
+  function handleItemConfirmed(item: T) {
     handleClose();
-    alert(item.displayName);
-    setTimeout(() => onConfirmed(item));
+    setTimeout(() => onConfirmed(item), 10);
   }
 
   function handleFilterInput(e: React.KeyboardEvent<HTMLInputElement>) {

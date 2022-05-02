@@ -9,20 +9,32 @@ export interface MentionsPopoverProps {
   children: JSX.Element;
   team: TeamWithMembers | undefined;
 }
-
 const MentionsPopover = forwardRef(
   (props: MentionsPopoverProps, ref: Ref<HTMLElement>) => {
     const [isOpen, setIsOpen] = useState(true);
+    const [selected, setSelected] = useState("");
 
     const onClose = () => {
       setIsOpen(false);
     };
 
-    return (
+    const onSelect = (user: string) => {
+      setSelected(user);
+    };
+
+    return selected ? (
+      <p>
+        <a href=";">@{selected}</a>
+      </p>
+    ) : (
       <Popover
         isOpen={isOpen}
         content={() => (
-          <UserMentionSubMenu team={props.team} onClose={onClose} />
+          <UserMentionSubMenu
+            team={props.team}
+            onClose={onClose}
+            onConfirmed={onSelect}
+          />
         )}
         align={"start"}
         positions={["bottom"]}
