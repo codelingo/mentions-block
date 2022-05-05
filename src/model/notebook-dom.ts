@@ -48,3 +48,22 @@ export interface MentionNode extends NodeCommon {
     readonly mentionedUser: User;
     readonly notificationSentAt?: Timestamp;
 }
+
+export type NotebookRange = {
+    readonly anchorID: NodeID | undefined;
+    readonly activeID: NodeID | undefined;
+};
+  
+
+export interface NotebookSelection extends NotebookRange {
+    readonly confirmed: boolean;
+    readonly originalFocusPoint: FocusPoint | undefined;
+}
+
+export interface FocusPoint {
+    readonly nodeID: NodeID | undefined;
+    readonly cursorPosition: CursorPosition;
+    readonly apply: boolean;
+}
+
+  export type CursorPosition = "start" | "end" | "custom" | number | undefined;

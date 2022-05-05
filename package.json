@@ -33,6 +33,8 @@
     "@testing-library/react": "^12.1.4",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.1",
+    "@types/medium-editor": "^5.0.3",
+    "@types/remarkable": "^2.0.1",
     "acorn": "^8.7.0",
     "autoprefixer": "^10.4.4",
     "babel-jest": "^27.5.1",
@@ -58,7 +60,9 @@
     "react-dom": "17.0.2",
     "compute-scroll-into-view": "^1.0.17",
     "postcss": "^8.4.12",
-    "@codelingo/react-tiny-popover": "^6.0.8"
+    "@codelingo/react-tiny-popover": "^6.0.8",
+    "medium-editor": "https://github.com/codelingo/medium-editor.git#v20201216.01",
+    "remarkable": "^2.0.1"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -66,5 +70,9 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "dependencies": {}
+  "dependencies": {
+    "@codelingo/react-tiny-popover": "^6.0.8",
+    "medium-editor": "git+https://github.com/codelingo/medium-editor.git#v20201216.01",
+    "remarkable": "^2.0.1"
+  }
 }
