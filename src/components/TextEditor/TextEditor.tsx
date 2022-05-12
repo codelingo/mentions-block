@@ -43,6 +43,7 @@ export interface TextEditorProps {
   onSelect?(apply: boolean): any;
   onFocusApplied?(focus: FocusPoint): any;
   onKeyDown?(e: React.KeyboardEvent<HTMLElement>, text: string): any;
+  onSetText(text: string): any;
   //dispatch: RootDispatch;
 }
 
@@ -78,6 +79,11 @@ export default class TextEditor extends React.Component<any> {
   handleKeyDown(e: KeyboardEvent<HTMLElement>) {
     this.props.onKeyDown?.(e, this.uncontrolledTextState.text);
 
+    setTimeout(() => {
+      this.props.onSetText(this.uncontrolledTextState.text);
+      this.checkFocus();
+    });
+
     if (e.key === "Delete" || e.key === "Backspace") {
       // sometimes... handleInput doesn't fire, so this is a backup plan
       // to make sure that we don't lose the keystroke 😩
@@ -101,9 +107,8 @@ export default class TextEditor extends React.Component<any> {
     const targetElement =
       (eventTarget as HTMLElement) ?? this.element ?? undefined;
     const previousText = this.uncontrolledTextState.text;
-    console.log("previousText", previousText);
     const nextText = targetElement?.innerHTML;
-    console.log("netText", nextText);
+
     if (nextText === undefined) {
       return;
     }
@@ -111,8 +116,8 @@ export default class TextEditor extends React.Component<any> {
     if (previousText !== nextText) {
       this.uncontrolledTextState.updateVersion++;
       this.uncontrolledTextState.text = nextText;
-      //this.props.onChange(nextText);
-      this.onTextChange(previousText, nextText);
+      this.props.onChange(previousText, nextText);
+      //this.onTextChange(previousText, nextText);
     }
   }
 
@@ -154,6 +159,10 @@ export default class TextEditor extends React.Component<any> {
     this.checkFocus();
   }
 
+  componentDidUpdate() {
+    //this.checkFocus();
+  }
+
   private checkFocus() {
     const medium = this.medium;
     if (!medium) {
@@ -161,6 +170,7 @@ export default class TextEditor extends React.Component<any> {
     }
 
     if (this.props.focus) {
+      console.log("this.props.focus.apply", this.props.focus.apply);
       if (this.props.focus.apply) {
         TextEditor.applyFocus(this.element, this.props.focus, medium);
 
@@ -214,17 +224,13 @@ export default class TextEditor extends React.Component<any> {
 
     if (textWasBlank && text.startsWith("@") && !text.includes(" ")) {
       console.log("textWasBlank && text.startsWith @");
-      //this.dispatch(setTextThunk(node.id, text));
-      //palette.show(text.substr(1));
-      //palette.changeSubMenu({ type: "users" });
     }
   }
 
   render() {
-    //const { tag } = this.props;
     const tag = "p";
 
-    const markdownHTML = inlineMarkdownToHTML(this.uncontrolledTextState.text);
+    const markdownHTML = inlineMarkdownToHTML(this.props.text);
 
     const elemProps = {
       tag,
@@ -236,5 +242,3 @@ export default class TextEditor extends React.Component<any> {
     return React.createElement(tag, elemProps);
   }
 }
-
-//TextEditor.contextType = ServicesContext;

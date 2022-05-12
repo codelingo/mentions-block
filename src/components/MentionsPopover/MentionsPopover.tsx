@@ -8,6 +8,9 @@ import { TeamWithMembers } from "../../model/auth";
 export interface MentionsPopoverProps {
   children: JSX.Element;
   team: TeamWithMembers | undefined;
+  isOpen: boolean;
+  handleClose: () => void;
+  handleSetText: (userText: string) => void;
 }
 const MentionsPopover = forwardRef(
   (props: MentionsPopoverProps, ref: Ref<HTMLElement>) => {
@@ -15,11 +18,13 @@ const MentionsPopover = forwardRef(
     const [selected, setSelected] = useState("");
 
     const onClose = () => {
-      setIsOpen(false);
+      // setIsOpen(false);
+      props.handleClose();
     };
 
     const onSelect = (user: string) => {
-      setSelected(user);
+      // setSelected(user);
+      props.handleSetText(user);
     };
 
     return selected ? (
@@ -28,7 +33,7 @@ const MentionsPopover = forwardRef(
       </p>
     ) : (
       <Popover
-        isOpen={isOpen}
+        isOpen={props.isOpen}
         content={() => (
           <UserMentionSubMenu
             team={props.team}

@@ -25,9 +25,39 @@ export enum Origins {
     DIFF_CAPTURE = "diff-capture",
 }
 
+export type HeadingNode = H1Node | H2Node | H3Node | H4Node;
+export type TextualNode = HeadingNode | ParagraphNode;
 
+export type NotebookNode =
+  | TextualNode
+  | MentionNode;
 
+  export interface NodeCommon {
+    readonly id: NodeID;
+    readonly metadata: NodeMetadata;
+    //readonly chatID?: ChatID | null;
+  }
+  
+  interface TextNodeCommon extends NodeCommon {
+    readonly text: string;
+    //readonly mentions?: Mention[]; // Currently only used in p nodes
+  } 
 
+  export interface H1Node extends TextNodeCommon {
+    readonly type: "h1";
+  }
+  export interface H2Node extends TextNodeCommon {
+    readonly type: "h2";
+  }
+  export interface H3Node extends TextNodeCommon {
+    readonly type: "h3";
+  }
+  export interface H4Node extends TextNodeCommon {
+    readonly type: "h4";
+  }
+  export interface ParagraphNode extends TextNodeCommon {
+    readonly type: "p";
+  }
 
 export interface NodeMetadata extends CreatedTimestamp {
     readonly updatedBy: UserID;

@@ -34,35 +34,46 @@ function remarkableULRenderer(tokens: any[] /*OrderedListOpenToken[]*/, i: numbe
 
 /** scrollIntoView takes advantage of WebKit/Chromium's `scrollIntoViewIfNeeded` function, with fallback to the standard `scrollIntoView` */
 export function scrollIntoView(element: HTMLElement) {
-    // this code needs to take the title bar view into account when scrolling... hmmm how to do so?
-  
-    try {
-      const actions = computeScrollIntoView(element, {
-        scrollMode: "if-needed",
-        block: "nearest",
-        inline: "nearest",
+  // this code needs to take the title bar view into account when scrolling... hmmm how to do so?
+
+  try {
+    const actions = computeScrollIntoView(element, {
+      scrollMode: "if-needed",
+      block: "nearest",
+      inline: "nearest",
+    });
+
+    setTimeout(() => {
+      actions.forEach(({ el, top, left }) => {
+        el.scrollTop = top;
+        el.scrollLeft = left;
       });
-  
-      setTimeout(() => {
-        actions.forEach(({ el, top, left }) => {
-          el.scrollTop = top;
-          el.scrollLeft = left;
-        });
-      });
-    } catch {}
+    });
+  } catch {}
+}
+
+export function clearSelection(): void {
+  const selection = window.getSelection();
+  if (selection) {
+    if (selection.empty) {
+      selection.empty();
+    } else if (selection.removeAllRanges) {
+      selection.removeAllRanges();
+    }
   }
+}
   
 
-  export function inlineMarkdownToHTML(markdown: string): string {
-    return remarkable.renderInline(markdown);
-  }
-  
-  // export function blockMarkdownToHTML(markdown: string): string {
-  //   return remarkable.render(markdown);
-  // }
-  
-  export function fragmentToHTML(frag: DocumentFragment): string {
-    const elem = document.createElement("div");
-    elem.appendChild(frag);
-    return elem.innerHTML;
-  }
+export function inlineMarkdownToHTML(markdown: string): string {
+  return remarkable.renderInline(markdown);
+}
+
+// export function blockMarkdownToHTML(markdown: string): string {
+//   return remarkable.render(markdown);
+// }
+
+export function fragmentToHTML(frag: DocumentFragment): string {
+  const elem = document.createElement("div");
+  elem.appendChild(frag);
+  return elem.innerHTML;
+}

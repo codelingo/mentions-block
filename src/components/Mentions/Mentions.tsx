@@ -20,7 +20,15 @@ const Mentions = (props: MentionsProps) => {
   };
 
   return (
-    <>{isOpen && <UserMentionSubMenu team={props.team} onClose={onClose} />}</>
+    <>
+      {isOpen && (
+        <UserMentionSubMenu
+          team={props.team}
+          onClose={onClose}
+          onConfirmed={() => {}}
+        />
+      )}
+    </>
   );
 };
 
