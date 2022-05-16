@@ -9,13 +9,14 @@ import { TextEditor } from "../TextEditor";
 
 export interface MentionsEditorProps {
   children: JSX.Element;
+  text: string | undefined;
   team: TeamWithMembers | undefined;
 }
 
 function MentionsEditor(props: MentionsEditorProps) {
   const palette = useCommandPaletteState();
   const [isOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState("R");
+  const [text, setText] = useState(props.text ?? "");
 
   function handleChangeText(prevText: string, text: string) {
     const textWasBlank = prevText === "";

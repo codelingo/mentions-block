@@ -81,7 +81,7 @@ export default class TextEditor extends React.Component<any> {
 
     setTimeout(() => {
       this.props.onSetText(this.uncontrolledTextState.text);
-      this.checkFocus();
+      //this.checkFocus();
     });
 
     if (e.key === "Delete" || e.key === "Backspace") {
@@ -163,6 +163,31 @@ export default class TextEditor extends React.Component<any> {
     //this.checkFocus();
   }
 
+  shouldComponentUpdate(nextProps: TextEditorProps): boolean {
+    const shouldUpdate =
+      nextProps.updateVersion !== this.uncontrolledTextState.updateVersion;
+
+    const isTextChange = this.uncontrolledTextState.text !== nextProps.text;
+
+    if (shouldUpdate || isTextChange) {
+      this.uncontrolledTextState = {
+        text: nextProps.text,
+        updateVersion: nextProps.updateVersion
+      };
+
+      if (this.medium && isTextChange) {
+        const selection: selectionObject | null = this.medium.exportSelection();
+        this.medium.setContent(nextProps.text);
+        this.forceUpdate();
+        if (selection) {
+          setTimeout(() => this.medium!.importSelection(selection, true));
+        }
+      }
+    }
+
+    return shouldUpdate && isTextChange;
+  }
+
   private checkFocus() {
     const medium = this.medium;
     if (!medium) {
@@ -170,7 +195,7 @@ export default class TextEditor extends React.Component<any> {
     }
 
     if (this.props.focus) {
-      console.log("this.props.focus.apply", this.props.focus.apply);
+      //console.log("this.props.focus.apply", this.props.focus.apply);
       if (this.props.focus.apply) {
         TextEditor.applyFocus(this.element, this.props.focus, medium);
 

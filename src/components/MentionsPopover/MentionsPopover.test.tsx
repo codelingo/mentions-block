@@ -5,7 +5,12 @@ import MentionsPopover from "./MentionsPopover";
 describe("MentionsPopover", () => {
   test("renders the MentionsPopover component", () => {
     render(
-      <MentionsPopover team={undefined}>
+      <MentionsPopover
+        team={undefined}
+        isOpen={false}
+        handleClose={() => {}}
+        handleSetText={() => {}}
+      >
         <></>
       </MentionsPopover>
     );

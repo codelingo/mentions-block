@@ -5,7 +5,7 @@ import { TeamWithMembers, User } from "../../model/auth";
 import MentionsEditor from "./MentionsEditor";
 
 export default {
-  title: "ReactComponentLibrary/MentionsTest",
+  title: "ReactComponentLibrary/MentionsEditor",
   component: MentionsEditor
 } as ComponentMeta<typeof MentionsEditor>;
 
@@ -44,5 +44,6 @@ const team: TeamWithMembers = {
 
 export const HelloWorld = Template.bind({});
 HelloWorld.args = {
-  team: team
+  team: team,
+  text: "text here"
 };
